@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Coin
+from .models import Coin, Algo, Currency
 
 
 @admin.register(Coin)
