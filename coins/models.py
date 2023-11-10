@@ -12,6 +12,17 @@ class Algo(models.Model):
         verbose_name = 'Алгоритм'
         verbose_name_plural = 'Алгоритмы'
 
+class Method(models.Model):
+    '''Доказательство работы'''
+    title = models.CharField('Название метода', max_length=20)
+    description = models.TextField('Описание метода', blank=True)
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Доказательство работы/доли'
+        verbose_name_plural = 'Доказательство работы/доли'
 
 class Currency (models.Model):
     '''Биржи'''
@@ -31,8 +42,9 @@ class Coin(models.Model):
     imag = models.ImageField('Картинка', upload_to='image/&Y')
     description = models.TextField('Описание', blank=True)
     date_publ = models.DateField('Дата выхода')
-    algo = models.ManyToManyField(Algo, verbose_name='Алгоритмы')
-    currency = models.ManyToManyField(Currency, verbose_name='Биржи')
+    method = models.ManyToManyField(Method, blank=True, verbose_name='Доказательство работы/доли')
+    algo = models.ManyToManyField(Algo, blank=True, verbose_name='Алгоритмы')
+    currency = models.ManyToManyField(Currency, blank=True, verbose_name='Биржи')
     url = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
