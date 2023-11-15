@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    {% for coin in coin_list %}
+    <h2>Монеты: {{ coin.title }}</h2>
+        <p>Описание монеты: {{ coin.description }}</p>
+        <p>{% for algo in coin.algo.all %}
+        Алгоритм: {{ algo.title }}
+        {% endfor %}
+        </p>
+        <p>{% for method in coin.method.all %}
+        Метод добычи: {{ method.title }}
+        {% endfor %}
+        </p>
+        <p><img src="{{ coin.imag.url }}" width="150px" height=""</p>
+    {% endfor %}
 
 </body>
 </html>
