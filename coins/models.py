@@ -53,3 +53,17 @@ class Coin(models.Model):
     class Meta:
         verbose_name = 'Монета'
         verbose_name_plural = 'Монеты'
+
+class Reviews(models.Model):
+    '''Отзывы'''
+    email = models.EmailField()
+    name = models.CharField('Имя', max_length=50)
+    text = models.TextField('Текст отзыва', max_length=2000)
+    coin = models.ForeignKey(Coin, verbose_name='Монета', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name}, {self.coin}'
+
+    class Meta:
+        verbose_name = 'Монета'
+        verbose_name_plural = 'Монеты'
