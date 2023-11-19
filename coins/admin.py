@@ -17,7 +17,6 @@ class CurrencyAdmin(admin.ModelAdmin):
 class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'coin')
 
-
 @admin.register(Method)
 class MethodAdmin(admin.ModelAdmin):
     list_display = ('title', )

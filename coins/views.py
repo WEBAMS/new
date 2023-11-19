@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from .models import Coin
+from .form import ReviewForm
 
 class CoinsViews(View):
     '''Список монет'''
@@ -13,3 +14,14 @@ class CoinDetail(View):
     def get(self, request, slug):
         coin = Coin.objects.get(url=slug)
         return render(request, 'coins/coin_detail.html', {'coin': coin})
+
+class AddReview(View):
+    '''Добавление отзыва'''
+    def post(self, request, pk):
+        form = ReviewForm(request.POST)
+        film = Coin.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.coin = coin
+            form.save()
+        return redirect(coin.get_absolute_url())

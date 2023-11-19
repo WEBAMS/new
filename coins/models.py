@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Algo(models.Model):
     '''Алгоритмы'''
@@ -13,7 +14,7 @@ class Algo(models.Model):
         verbose_name_plural = 'Алгоритмы'
 
 class Method(models.Model):
-    '''Доказательство работы'''
+    '''Метод добычи'''
     title = models.CharField('Название метода', max_length=20)
     description = models.TextField('Описание метода', blank=True)
 

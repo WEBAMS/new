@@ -29,7 +29,8 @@
 
     <div>
         <span>Оставить отзыв:</span>
-        <form action = "{% url 'add.review' coin.id %}" method="post">
+        <form action = "{% url 'add_review' coin.id %}" method="post">
+            {% csrf_token %}
             <div>
                 <label>Ваш отзыв</label>
                 <textarea name="text"></textarea>
