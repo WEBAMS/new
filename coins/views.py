@@ -19,9 +19,8 @@ class AddReview(View):
     '''Добавление отзыва'''
     def post(self, request, pk):
         form = ReviewForm(request.POST)
-        film = Coin.objects.get(id=pk)
         if form.is_valid():
             form = form.save(commit=False)
-            form.coin = coin
-            form.save()
-        return redirect(coin.get_absolute_url())
+            form.coin_id = pk
+        return redirect('/')
+
