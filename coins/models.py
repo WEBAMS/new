@@ -51,6 +51,9 @@ class Coin(models.Model):
     def __str__(self):
         return f'{self.title}, {self.date_publ}'
 
+    def get_absolute_url(self):
+        return reverse('coin_detail', kwargs={'slug': self.url})
+
     class Meta:
         verbose_name = 'Монета'
         verbose_name_plural = 'Монеты'

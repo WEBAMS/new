@@ -13,6 +13,12 @@
     <div>
         <a href="/">Главная</a>
         <a href="/admin">Авторизация</a>
+        {% if user.is_authenticated %}
+            <p>Привет, {{ user.username }}, вы авторизованы на сайте!</p>
+            <a href="{% url 'logout' %}">Выход</a>
+        {% else %}
+            <a href="{% url 'login' %}">Авторизация</a>
+        {% endif %}
     </div>
 
     <h2>Монета: {{ coin.title }}</h2>
@@ -26,6 +32,15 @@
         {% endfor %}
         </p>
         <p><img src="{{ coin.imag.url }}" width="150px" height=""</p>
+
+    <div>
+        {% for review in coin.reviews_set.all %}
+            <div>
+                <h5>{{ review.name }}</h5>
+                <p>{{ review.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
 
     <div>
         <span>Оставить отзыв:</span>
