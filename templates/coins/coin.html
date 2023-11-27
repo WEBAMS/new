@@ -4,32 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>Прогноз курса криптовалют</title>
 </head>
 <body>
-    <div>
-        <a href="/">Главная</a>
-        {% if user.is_authenticated %}
-        <p>Привет, {{ user.username }}, вы авторизованы на сайте!</p>
-        <a href="{% url 'logout' %}">Выход</a>
-        {% else %}
-        <a href="{% url 'signup' %}">Регистрация</a>
-        <a href="{% url 'login' %}">Авторизация</a>
-        {% endif %}
-    </div>
-    {% for coin in coin_list %}
-    <h2>Монета: <a href="/{{ coin.url }}/">  {{ coin.title }} </a></h2>
-        <p>Описание: {{ coin.description }}</p>
-        <p>{% for algo in coin.algo.all %}
-        Алгоритм: {{ algo.title }}
-        {% endfor %}
-        </p>
-        <p>{% for method in coin.method.all %}
-        Метод добычи: {{ method.title }}
-        {% endfor %}
-        </p>
-        <p><img src="{{ coin.imag.url }}" width="150px" height=""</p>
-    {% endfor %}
 
+    <div id="root">
+        <div>
+            <ul class="menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/">Монеты</a></li>
+                <li><a href="/">Торговые сигналы</a></li>
+            </ul>
+        </div>
+            <div class="auth">
+                <a href="/">Главная</a>
+                {% if user.is_authenticated %}
+                <p>Привет, {{ user.username }}, вы авторизованы на сайте!</p>
+                <a href="{% url 'logout' %}">Выход</a>
+                {% else %}
+                <a href="{% url 'signup' %}">Регистрация</a>
+                <a href="{% url 'login' %}">Авторизация</a>
+                {% endif %}
+            </div>
+        
+    <div class="body">
+        {% for coin in coin_list %}
+            <h2>Монета: <a href="/{{ coin.url }}/">  {{ coin.title }} </a></h2>
+                <img src="{{ coin.imag.url }}" width="150px" height="">
+                Описание: {{ coin.description }}
+                {% for algo in coin.algo.all %}
+                Алгоритм: {{ algo.title }}
+                {% endfor %}
+                {% for method in coin.method.all %}
+                Метод добычи: {{ method.title }}
+                {% endfor %}
+        
+        {% endfor %}
+    </div>
 </body>
 </html>
